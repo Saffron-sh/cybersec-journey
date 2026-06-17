@@ -2,11 +2,129 @@
 
 ## TCP
 ### Transmission Control Protocol
-- #TODO
+- Is like the inventory manager of the ship. IP might take you to barbados, but TCP is what makes sure that your 22 barrels of goods is sent there and 12 barrels of rum are recieved.
+- How?
+    - Imagine sending packets via TCP
+    ```txt
+    Packet #1 sent | #1 response noted (ACK)
+    Packet #2 sent | #2 response noted (ACK)
+    Packet #3 sent | #3 response noted (ACK)
+    Packet #4 sent | #4: WAIT A DAMN MINUTE
+    Where TF is the ACK for packet 4, RETRANSMIT IT000000
+    ```
+    - TCP will keep re-transmitting #4 till either it gets a ACK response for it, or it gets timed out or reaches the retransmission limit.
+---
+## UDP
+### User Datagram Protocol 
+##### The Rum induced cousin of TCP
+- It also trasmits data... just a lil differently.
+- It keeps transmitting data and if a packet is lost, it does what `pass` does in python.
+- Now, it may sound unconventional, but it has it's own great application in live audio/video communication.
+- UDP provides no guarantee of:
+    - Delivery
+    - Ordering
+    - Retransmission
+---
+## On both TCP & UDP
+### Uses
+- TCP is preferred in applications where the ordered delivery is more important the the speed of the delivery.
+- UDP has its use in applications where speed is of importance, a partially sent/recieved data doesn't make the economy crash here.
+### Question:
+- What impact does it have when TCP stops the process due to one missing packet. What actually happens?
+> Correction first, no process is getting stopped. This is what happens:
+```txt
+Imagine TCP sends packets:
+#17 | #18 | #19 | #20
+
+And the internet does:
+#17 lost
+#18 arrived
+#19 arrived
+#20 arrived
+
+The reciever now sees:
+#18, #19,#20, and goes
+"Oi, where TF is #17, you threw that bastard down to davy jhones locker?"
+
+And thus the reciever does not hand an incomplete packet bunch to the application, because it made a BLOOD OATH to the application, an oath of "Ordered Delivery". TCP honours the oath and keeps the later packets in a buffer a sort of "waiting room" and then tells the sender:
+"Oi #17 ain't on board yet mate"
+The sender then re-transmits #17.
+The whole pair gets completed and ONLY THEN does TCP hand over all 4 to the application. Keeping to the oath.
+The application is the only thing that gets somewhat stalled because of it, but all other connections are intact and working, packets are being transmitted and recieved, just the ones from #17's pair that were recieved were held in the stall.
+
+```
+
 ---
 ## IP
 ### Internet Protocol
-- #TODO
+#### The Ship's Navigator
+- Takes the ship to the destination.
+- See, each packet has a **SOURCE IP** and a **DESTINATION IP**. IP makes use of these and makes sure your packet reaches the destination.
+- Let's imagine a packet's journey.
+    - You type "https://archlinux.org" in your browser's search bar.
+    - The browser creates a HTTP get request.
+    - It gets wrapped into a TCP segement which stores the source and destination port.
+    - That gets stored into a IP packet's payload whose header defines the source and destination IP addresses.
+    - That gets wrapped into an Ethernet frame which stores the source and destination MAC addresses.
+    ```txt
+    It will look something like:
+    Ethernet frame
+    ├── Header
+    │   ├── Destination MAC 11:22:33:44:55:66 (ROUTER)
+    │   └── Source MAC      12:50:33:87:46:3e (YOU)
+    └── Payload
+        └── IP Packet
+            ├── Header
+            │   ├── Destination IP  209.126.35.79 (archlinux.org)
+            │   └── Source IP       192.168.1.33 (YOU on the LAN)
+            └── Payload
+                └── TCP Segment
+                    ├── Header
+                    │   ├── Destination Port 443:HTTPS
+                    │   └── Source Port      22313:ephemeral
+                    └── Payload
+                        └── HTTP Data
+    ```
+    - That is what gets transmitted from your laptop to your home router: THE ENTIRE ETHERNET FRAME.
+    - The source port 22313 identifies the connection inside the TCP segment.
+    - Here the router carries out **TWO** things.
+    - **ONE**
+    - It takes the frame, strips it down to the IP packet, looks at the Destination IP.
+    - Takes down the IP packet, finds the TCP header, looks at the source port.
+    - Recreates the packet with a new source port, and a new source IP (it's own public IP, and ephemeral port)
+    - NAT comes in and takes a note of what INTERAL IP and ephemeral port the frame originally had.
+    - It also takes a note of what the new SOURCE IP and the new ephemeral port is.
+    - Enters them into the NAT tables as one entry like 192.168.1.33:22313 -> 45.25.65.142:55426
+    - **TWO**
+    - It looks at its routing table and sees multiple entries.
+    ```txt
+    Something like:
+    25.16.0.0/16    -->     Router O
+    209.126.0.0/16  -->     Router Q
+    209.126.32.0/24 -->     Router X
+    0.0.0.0/0       -->     ISP 
+    ```
+    - Routing tables are what routers use to "route" (forward) the packets from one node to the next.
+    - In this case we have two candidates: Router Q | Router X
+    - Where will our home router forward the packet to?
+    - Router X, because it's subnet is much smaller and describes a much specified network.
+    - REMEMBER: Routers use **Longest Prefix Matching** while deciding where to route a packet
+    - Thus the router will forward the packet to X.
+    - X will strip down the ethernet frame, see the destination IP, look at its routing table, and then will forward it.
+    - X will recreate the ethernet frame with its own MAC address as the source MAC, this happens at each hop.
+    - Each forwarding cycle is called a "HOP"
+    - This happens at each hop till the packets reaches the destination (archlinux.org|209.126.32.79) <- in our case.
+    - Then when arch linux responds, the whole process repeats, just with one distinction.
+    - Source,Destination = Destination,Source at IP level
+    ```txt
+    NOTE: TTL (Time to Live)
+    --> Defines for how many hops a packet would live before it is dropped by the network.
+    --> Is measured in HOPs
+    --> Suppose a packet has TTL=64
+    --> At each hop: `TTL-=1`
+    --> If it doesn't reach the destination IP before TTL becomes zero the packet gets dropped and we get a.
+    --> ICMP Time exceeded
+    ```
 ---
 ## ARP
 ### Address Resolution Protocol
@@ -15,6 +133,8 @@
 ## ICMP
 ### Internet Control Message Protocol
 ICMP is a network diagnostic and control protocol.
+
+- ICMP is the network's way of reporting status, errors and diagnostic information.
 
 Ping uses ICMP Echo Request and Echo Reply messages, but ICMP also carries messages such as:
 - Destination unreachable
