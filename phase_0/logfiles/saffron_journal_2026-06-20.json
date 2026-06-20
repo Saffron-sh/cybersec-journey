@@ -1,15 +1,26 @@
 {
   "entries": [
     {
+      "id": "1781979841117",
+      "date": "2026-06-20",
+      "time": "06:24 pm",
+      "title": "Phase Zero | Day 5",
+      "body": "Learnt how DNS actually works.\nLearnt about why /etc/hosts overrides DNS\nLearnt the hierarchy of the DNS recursive search.\nLearnt about the existence of registry & registrars for domains.\nLearnt who TF am i paying money to when i buy a domain.\nLearnt about linux 'dig' tool.\nLearnt about the existence of ICANN & IANA\nLearnt why tf a messed up sleep cycle can lead to a sub-optimal level of productivity day.\nAnd DMAN, it's not like the DNS just gives you the IP addresses, bro has to ask, fucking thrice LMAO.\nTS GOT LEVELS TO IT, LITERALLY.",
+      "tags": "DNS",
+      "mood": "😴",
+      "created": "2026-06-20T18:24:01.117Z",
+      "updated": "2026-06-20T18:28:50.006Z"
+    },
+    {
       "id": "1781789455309",
       "date": "2026-06-18",
       "time": "01:30 pm",
       "title": "Phase Zero | Day 4",
       "body": "Learnt about Subnets\nLearnt about the CIDR notation\nLearnt about How the LAN is divided internally. AND HOLY FUCK THERE ARE WAYS.\n\nLearnt how to quickly find the Broadcast and the Network IP using the \"Octet Blocks\" method\nTS GOLD FR FR\nUnderstand both the old school binary way of understanding and translating Subnets as well as the modern, quick method which used octet block method.",
       "tags": "Subnetting,CIDR",
-      "mood": "",
+      "mood": "🧠",
       "created": "2026-06-18T13:30:55.293Z",
-      "updated": "2026-06-18T13:33:42.463Z"
+      "updated": "2026-06-18T13:36:17.982Z"
     },
     {
       "id": "1781706136310",
@@ -45,5 +56,5 @@
       "updated": "2026-06-15T10:35:55.165Z"
     }
   ],
-  "exported": "2026-06-18T13:34:09.680Z"
+  "exported": "2026-06-20T18:52:19.001Z"
 }
