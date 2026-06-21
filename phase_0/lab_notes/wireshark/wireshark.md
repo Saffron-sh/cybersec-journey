@@ -20,7 +20,7 @@ The last two commands add your user to the wireshark group so you don't need roo
 
 Command used:
 
-````bash
+```bash
 sudo arping -c 3 192.168.1.1
 ```
 
