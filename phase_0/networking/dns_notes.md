@@ -68,7 +68,9 @@ So the request then goes to the DNS server.
 - So when the request comes to the Root Servers from you DNS, and the root server sees it is for `archlinux.org`. It'll basically say:
 ```txt
 Oh, me? Nah I Don't know where that guy is, but i know someone who does.
+
 Ask the TLD servers of ".org" they'll know.
+
 (That's what's called a Referral, exactly what you're not getting for a new job)
 ```
 - The request goes to the **TLD SERVER**
@@ -80,7 +82,9 @@ Ask the TLD servers of ".org" they'll know.
 - And what does the TLD server says?
 ```txt
 Well, you might not have expected this... but actually even i don't know
+
 where your guy is, oh but i know his landlord (Authoritative Name Server)
+
 They'll know where you can find him.
 ```
 - So TLD servers again "Referred" (get a job bro) the request to the authoritative name serves who maintain the records for `archlinux.org`
@@ -92,7 +96,7 @@ They'll know where you can find him.
 ```txt
 A   archlinux.org   209.126.35.79
 MX  archlinux.org   mail.archlinux.org
-TAT archlinux.org   "Welcome Tinkerers"
+TxT archlinux.org   "Welcome Tinkerers"
 ```
 - This guy won't refer, cause he knows where `archlinux.org` actually lives.
 - Reason? Cause bro got the *Authority*
@@ -146,3 +150,124 @@ oldmonk.captainpleaseleavesomerumfortherestofustoo.org
 
 - The registerar then updates the .org registery.
 - So now the TLD server for `.org` knows to forward any request for `captainpleaseleavesomerumfortherestofustoo.org` to `barcadi.captainpleaseleavesomerumfortherestofustoo.org` that comes asking for your IP.
+---
+## DNS Records:
+- Your domain's authoritative servers don't only store your IP address, they're multiple records and each one servers a different purpose.
+```txt
+A    -> IPv4
+AAAA -> IPv6
+MX   -> Mail Server
+```
+
+### MX (Mail Servers)
+- Mailservers are what send and recieve mails, e-mails to be precise.
+- And there are actually two kinds we should know about.
+**Aliases**: 
+- They're not actually mailservers, just forwarding addresses.
+> Kind of like unix symlinks
+For example:
+```txt
+Alias: posiedon@mountolympus.org
+Actual Address: kratosbrokemyneck@godofwar.com
+
+Now any email that's sent to the *Alias* will actually be just forwarded to the
+*Actual Address*
+```
+
+**Real Mailservers (Domain Specific)**
+- These are what companies actually use.
+```txt
+captain@captainsrum.org
+firstmate@captainsrum.org
+musician@captainsrum.org
+```
+- These are actual addresses.
+- They store inbox, sentbox, drafts, and attachments for each account.
+
+#### How does it actually work?
+- Actually? Simpler than you'd think.
+- Suppose you enter this in your mail service:
+```txt
+To: captain@captainsrum.org
+```
+Your mailserver's sending DNS goes:
+```txt
+"Cool! Who handles mail for captainsrum.org"
+```
+DNS says: (provided by your authoritative NS)
+```txt
+"MX 10 mail.captainsrum.org"
+```
+But the network requires a number, your mailserver again goes:
+```txt
+"Beautiful, what's the IP of mail.captainsrum.org then?"
+```
+DNS says: (provided by your authoritative NS)
+```txt
+"A 60 203.0.114.42"
+```
+- **Only then** does the sender connects to that IP and **SMTP** (Simple Mail Transfer Protocol) sends the email. (That's a fish for another day now)
+---
+### CNAME
+- These really are just *aliases*
+- Suppose i want to link
+```txt
+blog.captainsrum.org
+```
+To my actual blog page at 
+```txt
+captain-blogs.netlify.app
+```
+I'd just add a **CNAME** entry in the *Authoritative NS* records like:
+```txt
+blog.captainsrum.org
+
+CNAME   captain-blogs.netlify.app
+```
+Now DNS will see that and go: 
+```txt
+"Oh, that's just an alias"
+```
+and will perform another lookup to find:
+```txt
+captain-blogs.netlify.app
+
+A   12.50.33.52
+A   203.18.29.17
+```
+
+- Okay, understandable... But what's the need for them anyways?
+
+> Well, think, if tomorrow netlify decides to change 12.50.33.52 to 12.51.34.53
+
+> By the time you will know *Netlify did something* half the users will be left with a `404`.
+
+> But if you have a **CNAME** instead of a direct entry for netlify...
+
+> You don't have to do anything, only netlify has to update their records.
+
+#### Question:
+- Two IPs returned by the Authoritative NS for `captain-blogs.netlify.app`
+- Which one does firefox choose?
+> Actually? Depends on the browser and the OS
+> Normally anything will try IPv6 first, then IPv4, and if -- out of the two IPv4 ones -- one fails, it'll just choose the next. Answers' mostly conceptual and have "dependencies"
+
+### TXT
+- Yup, each domain gets to have an arbitrary text field where...
+- The owner can put pretty much *anything*.
+- I mean really, if I wanted to add "I like barcadi" in it, I just can.
+> And then everyone will know what to gift me lol.
+
+**But the ACUTAL use for it?**
+- One important use case ca be to prove ownership.
+- Suppose you tell google that you own `captainsrum.org` what happens?
+
+They don't take your word for it.
+
+They give you a text, a sort of verification token and say.
+```
+"Fine, put this <verification text> in the TXT field then"
+```
+- And if you actually own `captainsrum.org` you would be able to log into your registrar's interface and add that to your arbitrary text field. 
+- Do that, hit save.
+- And then when google `dig`s your website and finds that text in there, your ownership will be verified, cause ONLY the owner can modify that.

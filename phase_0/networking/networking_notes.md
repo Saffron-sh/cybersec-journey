@@ -144,7 +144,86 @@ Ping uses ICMP Echo Request and Echo Reply messages, but ICMP also carries messa
 - It happens right after DNS thus sits at layer 3, right alongside IP.
 - It just... exists and tells you "Yo, something happened" and that something can vary anywhere from host reachable to host offline.
 - But fret not, cause host unreachable after an ICMP echo request doesn't always mean that the machine is offline, it can just be the firewall being picky.
+---
+## DHCP 
+### Dynamic Host Configuration Protocol
+- The guy who tells you where you live. (sounds funny doesn't it?)
+- Well, imagine your brand new laptop, never been into your home LAN.
+- You connect it to the wifi. **How does it get the IP Address??**
+- Here is what happens:
+    - Your laptop (No IP yet) sends a frame.
+    - But to whom? and via what source IP?
+    - The frame looks like:
+```txt
+Source IP:          0.0.0.0
+Destination IP:     255.255.255.255
 
+Source MAC:         Laptop MAC
+Destination MAC:    FF:FF:FF:FF:FF:FF
+
+Makes sense?
+```
+
+- Yup, you read that right. **Your Laptop sends a broadcast frame across the LAN**
+- It is basically asking:
+```txt
+"Yo! Anyone know where I can get an IP here?"
+```
+
+- The **DHCP** in the router recieves that frame and **DORA** happens.
+```txt
+D:  Discover    <-- Your laptop just did this
+O:  Offer
+R:  Request
+A:  Acknowledge
+```
+- The next step, **DHCP** offers you something like:
+```txt
+IP Address:
+192.168.1.141
+
+Subnet Mask:
+255.255.255.0
+
+Default Gateway Address:
+192.168.1.1
+
+DNS:
+192.168.1.1
+```
+- Your machine requests that offered IP.
+- The **DHCP** acknowledges that request & finally you get an IP.
+
+### DHCP Lease
+- But remember, you don't *OWN* that IP, it is merely yours on a lease. A DHCP lease.
+- Just like TTL, when the lease expires, you either get to renew it, or you get assigned a new IP.
+- DHCP decides, thus *Dynamic*.
+
+#### Question:
+- What if DHCP runs out of IP addresses to lease?
+> Yup, that **CAN** happen. Suppose you configure your LAN like:
+> Subnet: 192.168.1.0/24
+> DNS Pool: 192.168.1.100 - 192.168.1.199
+> Then the DHCP can only assign those 100 addresses dynamically, not all.
+> And when DHCP runs out of those? Good luck gettin an IP.
+> You can argue that "This subnet should have 254 usable addresses", and you'd be correct. It's just that all of them are not handed over to DHCP to lease dynamically.
+> A lot of the IP addresses are reserved on the LAN for devices like your NAS, CCTVs, Router et cetra.
+> And whatever is remaining after the reserved ones and DHCP pool are at the mercy of the admin to be allocated statically.
+- So if you can set your IP to anything using linux `ip` or `ifconfig` why does DHCP exist at all?
+> Yup, you sure can, if the DHCP's pool is from 100-199 and you assign yourself 192.168.1.43, ain't not shit gonna go down.
+> The router will now see that a request came from 192.168.1.43, no biggie.
+> The router only cares that the request comes from within in the LAN, not that it came from a device whose IP was assigned by the DHCP. Traverse the OSI map in your mind, when the ethernet frame goes from internal node to router, is there any kind of IP authentication? NOPE.
+> So, you'll be fine as long as you assign yourself an IP out of the DHCP pool.
+> Cause if you do that...
+**IP CONFLICT**
+- Remeber that the router's ARP cache (or any device's arp cache) DOES NOT have any kind of authentication?
+- YUP, if you assign yourself an ip address of 192.168.1.150 in a LAN whose DHCP pool is 100-199 and later DHCP leases that address out to another node as well?
+- Now every time your laptop tells the router "Yo am at 150" the router's ARP cache will go "oh, okay"
+- And when Laptop B says the same thing, the ARP cache will again go "oh, okay"
+- See the problem?
+- Either you both will exprience a very weird internet connection and if you don't you'll start receiving half ass packets and maybe even packets the other node asked.
+- SO? **DO NOT DO THAT** 
+---
 ## Ports
 Not talking about ships & pirates here, but actually; that's where the name comes from. 
 Each machine is like a harbor, it has an IP address, say `192.168.43.24` and the harbor wants to dock two ships: *google.com & github.com* 
