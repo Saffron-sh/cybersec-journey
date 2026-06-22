@@ -271,3 +271,12 @@ They give you a text, a sort of verification token and say.
 - And if you actually own `captainsrum.org` you would be able to log into your registrar's interface and add that to your arbitrary text field. 
 - Do that, hit save.
 - And then when google `dig`s your website and finds that text in there, your ownership will be verified, cause ONLY the owner can modify that.
+
+
+## Misc Stuff Related to DNS
+- **TLS**: Encrypts HTTP to turn/upgrade it to HTTPS
+> But an MITM can still see the traffic. It can see, but it can't decipher unless somehow he's older than the universe.
+- **Certificate Authorities**:
+    - Browsers contain trusted CA public keys
+    - Trust comes from sugnature verification
+    - Public key verifies, private key signs

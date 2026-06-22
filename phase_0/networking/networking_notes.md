@@ -229,6 +229,30 @@ Not talking about ships & pirates here, but actually; that's where the name come
 Each machine is like a harbor, it has an IP address, say `192.168.43.24` and the harbor wants to dock two ships: *google.com & github.com* 
 Now my friends, what does a harbor have? PORTS. Yup same case for computer network ports. Each machine has 65536 ports (yeah, it's 2<sup>16</sup>) which lets it have that many connections.
 But why that number specifically? Because the port is stored in the TCP/UDP header as a 16 bit integer, and that can stores values going from 0->65535, which are **65536** total values. 
+
+### Common Ports Used by different services by default:
+| Category | Port Number | Service |
+|----------|-------------|---------|
+|   Web    |      80     |  HTTP   |
+|   Web    |     443     |  HTTPS  |
+|
+| Remote Access|22|SSH|
+| Remote Access|23|Telnet|
+| Remote Access|3389|RDP|
+|
+|Networking|53|DNS|
+|Networking|67/68|DHCP|
+|
+|Mail|25|SMTP|
+|Mail|110|POP3|
+|Mail|143|IMAP|
+|
+|File Sharing|21|FTP|
+|File Sharing|445|SMB|
+|
+|Databases|3306|MySQL|
+|Databases|5432|PostgreSQL|
+
 ### Question
 **BUT** if HTTPS is used by port 443 by both google and github, how can two services use https at the same time, it's not like two ships can dock at one port together?
 > Cause **YOU** are not using port 443, *google/github* is. Actually if you connect to both at the same time, it'll look like this:

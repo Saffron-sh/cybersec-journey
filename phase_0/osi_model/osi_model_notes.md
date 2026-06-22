@@ -137,19 +137,21 @@ Ethernet Frame
           └── HTTP Data
 ```
 
-### ARP
-#### Address Resolution Protocol
-- Read the name? well that's essentially what ARP does, it resolves your IP address to your MAC/hardware address on your local network: LAN, not just you, it does that for all devices on the LAN, and then remembers it (unlike you in the maths exam) in an ARP table.
+## Attack Surface On Each Layer:
+### Data link (2)
+- ARP Spoofing
+- Evil Twin Wi-Fi
 
-### ICMP
-#### Internet Control Message Protocol
-ICMP is a network diagnostic and control protocol.
+### Network (3)
+- IP Spoofing
 
-Ping uses ICMP Echo Request and Echo Reply messages, but ICMP also carries messages such as:
-- Destination unreachable
-- TTL expired
-- Network errors
-- Exists just to check whether the host is alive or chilling with davy jhones.
-- It happens right after DNS thus sits at layer 3, right alongside IP.
-- It just... exists and tells you "Yo, something happened" and that something can vary anywhere from host reachable to host offline.
-- But fret not, cause host unreachable after an ICMP echo request doesn't always mean that the machine is offline, it can just be the firewall being picky.
+### Transport (4)
+- SYN flood
+- Port Scanning
+
+### Application (7)
+- Default/Weak Creds
+- Upload Bugs
+- DNS Spoofing
+- Brute Force (Don't do manually for torvalds' sake)
+- SQLi
