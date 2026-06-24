@@ -1,0 +1,17 @@
+{
+    {
+        "index":0,
+        "name":"robots.txt",
+        "use":"A file in web servers which 'politely' tells web-crawlers what paths in the filesystem of the server they don't want them to access."
+    },
+    {
+    "index":1,
+    "name":"phpMyAdmin",
+    "use":"And admin interface panel which lets users log in and query the database."
+    },
+    {
+        "index":2,
+        "name":"<any-file>.sql",
+        "use":"Stores SQL statements/queries in plain text."
+    }
+}
