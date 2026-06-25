@@ -63,4 +63,20 @@ nmap -p- #with any option.
 > Nmap uses probes and notices how the OS responds to mutilple kinds of requests and messages, cause every OS has a different rule set for network connections.
 > After that, it again compares that with entries in its fingerprint database and then predicts what versionof what OS that machine be running on.
 
+- How does nmap know that a target even exists before scanning the shit out of it?
+> Now now now, we did a lil experiment cause we had a hypothesis that nmap actually uses *ARP* for host discovery before scanning.
+> So, we opened two terminals and ran these two commands
+> `tcpdump -i wlan0 arp`
+> `nmap -sn 192.168.1.0/24`
 
+> And YOO! the hypothesis was correct, we could see our sworn brother sending **ARP ping** requests for every IP on the subnet and then getting replies almost instantaneously.
+
+> So, **Nmap uses ARP to deiscover hosts** before actually scanning, and the scan goes through only if the host is up and running.
+
+- But what if the target is actively dropping discovery pings (ARP/ICMP)
+> Nmap got you covered for this scenario as well. 
+> If a sysadmin playing it smart and dropping those packets, nmap `-Pn` skips the whole "host discovery" path entirely.
+> It treats the host as, and scans the living shit out of it.
+> (The ports themselves are still discovered normally.)
+> If the host is actually down or some is actually closed, we'll get that info anyways.
+> Rare "low risk high reward" event.
