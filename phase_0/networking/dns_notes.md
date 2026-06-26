@@ -275,8 +275,79 @@ They give you a text, a sort of verification token and say.
 
 ## Misc Stuff Related to DNS
 - **TLS**: Encrypts HTTP to turn/upgrade it to HTTPS
-> But an MITM can still see the traffic. It can see, but it can't decipher unless somehow he's older than the universe.
+> An MITM can still observe the packets and metadata
+> (source/destination IPs, ports, packet sizes, timing, etc.),
+> but it cannot decrypt the TLS payload without the session keys.
 - **Certificate Authorities**:
     - Browsers contain trusted CA public keys
     - Trust comes from sugnature verification
     - Public key verifies, private key signs
+
+
+### DNS Spoofing
+- So, you want to act like YOU are the DNS and send your target to some **malicious** IP?
+- Go ahead, ain't i gonna be the one to stop you.
+**How do we do it**
+- First you gotta be MITM between the router and the target.
+- And after that, what you -- in theory -- do is:
+    - Any request that comes from the target for a DNS resolution.
+    - You take that, and insted of the actual DNS server replying, YOU reply with a forged packet and to an IP where you'd host some malicious site or smthg.
+    - You can do that above thing using `Bettercap` but remeber, if you're nothing with the tools, you don't deserve them.
+    - What DNS spoofing exploits is that whoever responds first to the request it sent out to the router (it thinks so), would be the correct responder, but just like the first love seldom stays, this assumption gets you exploited.
+
+**BUT**
+- It only works with HTTP, i.e- if you visit `https://captainsrum.org`, and the attacker has DNS spoofed you, and you get served a page `http://captainsrum.org`, then you my fine friend, are in trouble.
+- Because to DNS spoof https, the attacker would need cryptographic proof that the site served is actually `captainsrum.org`, and it's near impossible for them to get the original private key signed certificates and thus prove their identity.
+
+### DNSSEC: The Bigger Fish
+#### DNS Security Extensions
+- These are the bad boys who fw attacks.
+
+- Imagine your browser requests `captainsrum.org` from the gateway.
+- It goes to the MITM.
+- MITM forges a reply to some other IP running maybe apache2 and sends it.
+- Your browser recieves it and would normally have loaded it, **but**;
+- DNSSEC steps in and says:
+```txt
+"You're captainsrum.org?"
+MITM: "Yup"
+DNSSEC: "Prove it"
+MITM: "..."
+```
+- The reason being the underlying principles of the DNSSEC.
+- It is called "extensions" cause it's not one, but multiple records which are cryptographically signed so that your resolver can verify that it hasn't been modified.
+
+**DNSKEY**: Contains the public key
+**RRSIG**: Digital signature over DNS records
+> RRSIG is the digital signature over a set of DNS records. 
+> The resolver verifies that signature using the appropriate DNSKEY. 
+> If the verification succeeds, the resolver knows the records weren't modified after being signed.
+**DS**: Links trust between the parent and child DNS zones.
+
+What basically happens is:
+```txt
+
+You search for captainsrum.org on firefox
+
+Query reaches DNS
+
+DNS asks the Root servers
+
+Root servers refer to the .org TLD server AND PRESENT THE SIGNATURE THAT VERIFIES THAT THEY DID, THAT'S THE RRSIG 
+
+The referral records are accompanied by an RRSIG,
+which is a digital signature proving those records
+haven't been modified.
+
+.org servers refer the authoritative NS of for captainsrum.org AND PRESENT THE SIGNATURE THAT THEY DID, THAT'S THE RRSIG OF IT.
+
+The referral records are accompanied by an RRSIG,
+which is a digital signature proving those records
+haven't been modified.
+
+DS Links trust between the parent and child at each step.
+
+```
+
+- Running `dig captainsrum.org +trace` shows RRSIG & DS records in the real world.
+- Which tells us that TS ain't purely academic, it's actively working in the real world protecting you from assholes.
