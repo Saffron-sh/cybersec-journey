@@ -1,4 +1,4 @@
-{
+[
     {
         "index":0,
         "name":"robots.txt",
@@ -14,4 +14,4 @@
         "name":"<any-file>.sql",
         "use":"Stores SQL statements/queries in plain text."
     }
-}
+]
