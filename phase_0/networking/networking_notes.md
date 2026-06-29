@@ -312,3 +312,29 @@ Kernel: "Aye"
 ```
 > See that? Internally they might be two machines, or ever 20, but on the public internet, they'll be one IP, the router's IP using different services on different ephemeral ports.
 > Nat works with the router and stores this ip:port translation for internally forwarding the response at point {φ}. It works within the router.
+
+## Exposing services to the internet
+Now, you might want to be able to get into a system that's on the internet & not your LAN. 'Cause c'mon man, what was the last time you found cisco's production servers just chillin in yo' backyard.  
+In those cases, you'd want to have an endpoint accessible to/from the open internet, 'cause your exploit would try to connect back to some place, and if it doesn't, you -- my fine brother -- ain't getting shit sitting in the LAN twerking.  
+
+There're methods, and then there are **methods**, we're gonna talk about the second ones.
+
+#### Port Forwarding
+This one is fairly simple, since your router is the one accessing the internet actually, you write a rule in the router's settings which direct to it forward any data or connection coming to a specific port on it to your computer to a specific port.  
+
+And thus, your laptop is now -- apparently -- accessible to the public internet (given the guy accessing knows your IP)
+
+#### Virtual Private Server
+Another good option would be to install your pentesting/listening distro publicly on the internet with the help of a VPS.  
+You get your own `vCPU`, dedicated `Random Access Memory`, Storage space and at times,even `GPUs`. And you can do (almost) anything with it that you can do with a normal computer, just with a public IP now. (Pretty clean, right?)
+
+Well, though you have to still follow the ISPs regulations and terms, and not do anything illegal, not that you were planning to, but just telling you ;)
+
+#### Tunneling Services
+Now, Now, Now, don't let this one confuse you, cause there's a good chance it might.
+
+Tunneling services provide you with a publicly accessible endpoint, but this ain't a whole computer, just an IP.  
+And once you make the connection, that is - once the tunnel is established, all the data that comes to the tunnel gets forwarded to you, and whatever you share/host gets to be accessible to the whole internet.
+
+Think of it like: A VPS gives you a whole machine to use on the public internet, AND
+Tunneling gets your machine a public IP, not exactly its own, but everything sent to that IP and from that IP gets to you. So pretty much yours. lol.
