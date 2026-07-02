@@ -81,3 +81,55 @@ And each email server had (still has) different underlying rules. Some might dro
 
 With `DMRC` set up, the domain owner (the legitimate sender's domain, which just got impersonated), gets to *Prescribe* what to be done with the email.  
 Do take a note that "prescribe" and "enforce" aren't the same, the decision is still largely the reciepent's. But most comply with the DMRC prescriptions.
+
+## Web App Hacking
+### SQL Injection
+No Jack, the injection here is not a plastic tube with a piston and a needle which you'd start twerking if you saw it.  
+It actually is *an application layer vulnerability* which allows unsanitized user input to be passed directly to the SQL parser as a query.
+
+Let's take the example of a website which takes input from the users for their credentials and use SQL for their database management.  
+They'd expect a normal user to enter
+```txt
+username = admin
+passowrd = SuperSecret123
+```
+Now, a badly configured SQL application will take the user input, and build that directly into a query like:
+```sql
+SELECT * FROM USERS WHERE NAME='admin' AND PASS='SuperSecret123';
+```
+Looks normal, right?  
+Yup, cause this is the normal user.
+
+**THIS** is what an attacker will try to do:
+```txt
+username = admin' OR 1=1;--
+password = anything
+```
+Now, when **THAT** goes into the parser directly, it becomes:
+```sql
+SELECT * FROM USERS WHERE NAME='admin' OR 1=1;--' AND PASS='anything';
+                                           ^
+                                           ^
+                                Condition always TRUE
+```
+Smell anything suspicious?  
+**YUP**  
+1. The attacker adds an apostrophe themselves to complete the username search
+2. He/She added an OR opearator with a conditon that's **always true**.
+3. Used the `mySQL` inline comment indicator "--" and commented out everything after the conditional.
+4. The condition now always evaluates to true, potentially bypassing authentication or returning unintended results depending on the application. 
+5. Now, **THAT** kids, is SQL injection.
+
+> You'd take a note that the SQL parser wasn't the one at fault actually. In fact, it did exactly what it was supposed to do.  
+> It was the *application* that fabricated the query that had the bug. {Layer 7}
+
+### Underlying Principle
+
+The bug isn't that SQL understands attackers.
+
+The bug is that the application failed to distinguish between:
+
+- Data
+- SQL Syntax
+
+Once user-controlled input becomes SQL syntax, the attacker can change the meaning of the query itself.

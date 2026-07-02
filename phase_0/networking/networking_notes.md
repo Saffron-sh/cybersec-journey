@@ -338,3 +338,18 @@ And once you make the connection, that is - once the tunnel is established, all 
 
 Think of it like: A VPS gives you a whole machine to use on the public internet, AND
 Tunneling gets your machine a public IP, not exactly its own, but everything sent to that IP and from that IP gets to you. So pretty much yours. lol.
+
+## HTTP Methods:
+### Get
+Now, before you start shaking and screaming that `Get` fetches html pages, let me tell you something:
+This guy does **way** more.
+
+Get is used to retrieve resources over HTTP.
+
+Yeah, *re-fucking-sources*, not just html, and resources can be html/css/js/img/png/jpeg/json/freakin-anything
+So don't you dare say that it fetches html pages again.
+
+### Post
+Just like `Get` retrieves resources from the server, this bad boy **sends resources to the server**.
+
+Those resources can be login form data, registeration data, basically anything that can be uploaded to the server. It just sends data back to the server, whatever happens to the data afterward? Well... you better ask the server about that mate.
