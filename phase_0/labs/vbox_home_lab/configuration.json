@@ -1,0 +1,13 @@
+{
+    "initial_configuration":{
+        "creation_timestamp":"Fri Jul  3 11:13:28 PM IST 2026",
+        "Host":"Acer One 14 Z2-493",
+        "OS":"Arch Linux (7.0.14-arch1-1)",
+        "Guests":{
+            "Guest 1":"Kali Linux ()",
+            "Guest 2":"Metasploitable ()"
+        },
+        "Snapshots":null,
+        "Purpose":"To create a safe environment for experimenting with networking, enumeration, exploitation and privilege escalation."
+    }
+}

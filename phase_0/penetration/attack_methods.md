@@ -93,7 +93,7 @@ They'd expect a normal user to enter
 username = admin
 passowrd = SuperSecret123
 ```
-Now, a badly configured SQL application will take the user input, and build that directly into a query like:
+Now, an application that fails to treat user input as data will take the user input, and build that directly into a query like:
 ```sql
 SELECT * FROM USERS WHERE NAME='admin' AND PASS='SuperSecret123';
 ```
@@ -133,3 +133,28 @@ The bug is that the application failed to distinguish between:
 - SQL Syntax
 
 Once user-controlled input becomes SQL syntax, the attacker can change the meaning of the query itself.
+
+### XSS (Cross Site Scripting)
+XSS is yet another application layer vulnerability which, because of an application that fails to treat user input as data, lets the attacker inject HTML/JavaScript that another user's browser interprets as part of the page.  
+
+Assume there is a website which allows you to post comments, a normal user would enter something like:
+```txt
+Damn, apple citer is great.
+```
+And if the application treats user input as raw data, it will put the user input directly into the html, and then the text will become:
+```html
+<p> Damn, apple cider is great. </p>
+```
+No harm, right?
+**NOPE**, just no harm *yet*.
+
+What an attacker would do would be closer to:
+```html
+<script>malicious javascript code</script>
+```
+And now the browser will see the script tag and will execute the javascript that is inside those tags, why? Cause that is exactly what the browser is supposed to do.  
+Again, it is the fault of the application to let unsanitized user input to be put directly into the page's `html`
+
+> Once again, the browser wasn't wrong.
+> The browser faithfully executed the HTML it received.
+> The vulnerability exists because the application allowed user input to become part of the page's HTML.
