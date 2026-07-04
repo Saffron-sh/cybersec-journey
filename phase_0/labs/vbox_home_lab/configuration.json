@@ -1,13 +1,46 @@
 {
     "initial_configuration":{
         "creation_timestamp":"Fri Jul  3 11:13:28 PM IST 2026",
-        "Host":"Acer One 14 Z2-493",
-        "OS":"Arch Linux (7.0.14-arch1-1)",
-        "Guests":{
-            "Guest 1":"Kali Linux ()",
-            "Guest 2":"Metasploitable ()"
+        "host":{
+            "machine":"Acer One 14 Z2-493",
+            "os":"Arch Linux (7.0.14-arch1-1)"
         },
-        "Snapshots":null,
-        "Purpose":"To create a safe environment for experimenting with networking, enumeration, exploitation and privilege escalation."
+        "guests":{
+            "guest_1":"Kali Linux ()",
+            "guest_2":"Metasploitable ()"
+        },
+        "snapshots":null,
+        "network_configuration":null,
+        "purpose":"To create a safe environment for experimenting with networking, enumeration, exploitation and privilege escalation."
+    },
+    "day_1_configuration":{
+        "creation_timestamp":"Sat Jul  4 09:38:43 PM IST 2026",
+        "host":{
+            "machine":"Acer One 14 Z2-493",
+            "os":"Arch Linux (7.0.14-arch1-1)"
+        },
+        "gests":{
+            "guest_1":"Kali Linux (6.19.14+kali-amd64)",
+            "guest_2":"Metasploitable (2.6.24-16-server)"
+        },
+        "snapshots":{
+            "kali-linux":[
+                {
+                    "snapshot_index":0,
+                    "name":"Fresh-install-kali-NAT-Only",
+                    "uuid":"75c46b0d-28b6-4223-8dfe-a64398b7da7a",
+                    "description":"Just a fresh install of kali linux with only one network adapter"
+                },
+                {
+                    "snapshot_index":1,
+                    "name":"Kali-Meta",
+                    "uuid":"dfd13c55-fe55-4f9a-b450-fe71293acafa",
+                    "description":"A snapshot of the stable state of kali where it is on both NAT adapter with the host os, and internal network with metaploitable"
+                }
+            ],
+            "metasploitable":null
+        },
+        "network_configuration":"Host_OS<-NAT->kali | kali<-(Internal Network)->metasploitable",
+        "purpose":"To create an isolated lab system where the attacker has network access and simultaneously has a connection to the intentionally vulnerable machine as well."
     }
 }
