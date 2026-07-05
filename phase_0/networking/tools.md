@@ -48,3 +48,26 @@ dig +trace +short example.com      # Show trace path in short, readable format
 dig example.com +noall +answer     # Display only the answer section
 dig example.com +noall +authority  # Display only the authority section
 ```
+
+### DIRB
+- A directory/file brute-forcing tool that attempts to discover hidden web server paths by sending HTTP requests to lots of common wordlist entries.
+- Typically used against HTTP/HTTPS targets to find things like admin panels, backups, login pages, and other exposed resources.
+- Commands are:
+```bash
+dirb http://example.com                          # Crawl default wordlist against the site
+dirb http://example.com /path/to/wordlist        # Use a specific wordlist
+dirb https://example.com /path/to/wordlist       # HTTPS target
+dirb http://example.com /path/to/wordlist -r    # Follow redirects
+dirb http://example.com /path/to/wordlist -S     # Use SSL/TLS handling as needed (HTTPS-related)
+dirb http://example.com -w /path/to/wordlist    # Another way to specify the wordlist
+dirb http://example.com /path/to/wordlist -V     # Verbose output
+dirb http://example.com /path/to/wordlist -a UA  # Set a custom User-Agent
+```
+##### Common Combinations:
+```bash
+dirb http://example.com /usr/share/wordlists/dirb/common.txt
+dirb https://example.com /usr/share/wordlists/dirb/common.txt
+dirb http://example.com /path/to/wordlist -r -V     # More detailed output + redirects
+dirb http://example.com /path/to/wordlist -a "Mozilla/5.0"  # Custom UA
+dirb http://example.com -w /path/to/wordlist        # Explicit wordlist flag
+```
