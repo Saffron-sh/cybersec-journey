@@ -353,3 +353,41 @@ So don't you dare say that it fetches html pages again.
 Just like `Get` retrieves resources from the server, this bad boy **sends resources to the server**.
 
 Those resources can be login form data, registeration data, basically anything that can be uploaded to the server. It just sends data back to the server, whatever happens to the data afterward? Well... you better ask the server about that mate.
+
+### Cookies:
+So these are interesting, they're set inside your web-client when the server sends them via a 'set-cookie' header. And from then on, every request your browser makes, it sends the cookie along; so that the server knows which pirate is talking.
+
+The *need* for cookies was that HTTP in itself is *stateless*, and as a result of that, can't remeber n' store your info persistenly. So cookies are sent on top of HTTP to make the connection kinda *stateful*.
+
+Cookies are not authenticators themselves, instead, they're like containers that transport a state between your browser and the server. The state now can be a session ID or a login token or anything. The state decides the purpose, not the cookie.
+
+**Types of Cookies**:
+- **Session Cookies**: These don't have an expiry date, they remain as long as the browser is open and you're browing, i.e- the *session* exist. When you close the browser? BOOM. GONE
+#### Question: But then why do I not have to log in each time I open THM?
+- Cause, Type-2: **Persistent Cookies**: The server sends them with either an expiry date or max-age header. They're stored in your browser's local storage, thus when you open and close  and open chromium again, you're still logged in.
+- **Third Party Cookies**:  Now, these are the ones that actually track you across websites. How? Well, suppose there are three different sites, all using google ads, your browser will send a `GET` request for the address for the `ad-banner.png`, google will respond with that AND a session-id cookie which your browser now stores, and any other site you visit which has google ads will get a `GET` request with the session-id cookie as well, so google will know what websites you browser AND IN WHAT ORDER (feels reason enough to install Graphene doesn't it?).
+
+
+> **Attack Vector**: **Session Hijacking**: The persistent feature of the session-id cookies make them conveninet, and thus -- at the same time -- make them very valuable as well. Cause anyone who manages to get your persistent cookie doesn't need any password or TFA OTP then, they can just spoof being you, cause the session-id is the only thing proving to the server that it's you. That is why cookies are sent **only** over HTTPS.
+
+### Other Components
+#### Load Blanancers:
+As the name suggests, they balance the load on the server, usually when you connect to a website with a load balancer, your request has to go through it, and when it gets the request it *smartly* forwards the request to one of many servers using alogrithms such as:
+> Round Robin: Sends to each server in turn.  
+> Weighted: Sends to the least busy server.
+
+These guys are also responsible for performing periodic checks on each server (health checks) to make sure they're running.  
+More than that, load balancers can also enforce security rules, like seeing that one certain IP has been sending 12000 SYN flags per minute, they'll drop those packets or for somene trying to Ddos you, they might have rules like only 100 connections/second/IP.
+
+#### CDN (Content Delivery Networks):
+A CDN works like a traffic routing service. Suppose you setup a website with cloudflare as the CDN. After that you won't have your files hosted on just one server (though they're still 'hosted' on one actually). The CDN provided would have thousands of distribution servers across the globe, and whenever somone from Hokkaido tries to visit your website, the request would not have to travel all the way to Tallin, the CDN's local distribution server might be in Tokyo or even Hokkaido itself. It'll fetch the data from the source and will serve it in the response to the request, and then the stored data will live with a TTL. And when that TTL expires, it'll just fetch again. This way there's no need to update the codebase every time on 12000 servers, only the source server needs to update.
+
+#### Database:
+- [Almost] every website requires a way of storing data. That's where databases come in. Webservers can communicate with them to fetch/update/manipulate data. There are many kinds like MySQL|MongoDB|Postres each serve a different purpose.
+
+#### WAF (Web Application Firewall):
+- Defined as firewalls for the web server.
+- Monitors traffic and controls the flow.
+- Watches out for known attack methods, and drops traffic or blocks IPs w.r.t. the situaion.
+
+

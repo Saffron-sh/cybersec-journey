@@ -139,7 +139,7 @@ XSS is yet another application layer vulnerability which, because of an applicat
 
 Assume there is a website which allows you to post comments, a normal user would enter something like:
 ```txt
-Damn, apple citer is great.
+Damn, apple cider is great.
 ```
 And if the application treats user input as raw data, it will put the user input directly into the html, and then the text will become:
 ```html
@@ -158,3 +158,6 @@ Again, it is the fault of the application to let unsanitized user input to be pu
 > Once again, the browser wasn't wrong.
 > The browser faithfully executed the HTML it received.
 > The vulnerability exists because the application allowed user input to become part of the page's HTML.
+
+### Session Hijacking
+The persistent feature of the session-id cookies make them conveninet, and thus -- at the same time -- make them very valuable as well. Cause anyone who manages to get your persistent cookie doesn't need any password or TFA OTP then, they can just spoof being you, cause the session-id is the only thing proving to the server that it's you. That is why cookies are sent **only** over HTTPS.

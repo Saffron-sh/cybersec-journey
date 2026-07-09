@@ -261,5 +261,200 @@ Frame  <1010101> Ethernet
 - Definition, use, and history of HTTP (Tim-Burners Lee)
 
 ### Request & Responses
+- HTTP request: GET
+- URL as an instruction to the browser for how and where to retrieve a resource from.
+- HTTP response headers.
+
+### HTTP Methods:
+- Explanation (used by a client to show intended action)
+- **GET**: Getting info *from* a web server;
+- **POST**: Submitting data to a web server or [potentially] creating new records;
+- **PUT**:  Submitting data to a web server to update info;
+- **DELETE**: Used for deleting info/records from a web server;
+
+### HTTP Status Codes:
+- When a web server responds, it always includes a status code as well.
+- Status Code Ranges:
+
+| Status Code Range | Category | Description |
+|-------------------|----------|-------------|
+| **100–199** | Information Response | Sent to tell the client the first part of their request has been accepted and they should continue sending the rest of their request. These codes are no longer very common. |
+| **200–299** | Success | Used to tell the client their request was successful. |
+| **300–399** | Redirection | Used to redirect the client's request to another resource, either a different webpage or a different website. |
+| **400–499** | Client Errors | Used to inform the client that there was an error with their request. |
+| **500–599** | Server Errors | Reserved for errors happening on the server side and usually indicate a major problem with the server handling the request. |
+
+- Common HTTP Status Codes
+
+| Status Code | Name | Description |
+|-------------|------|-------------|
+| **200** | OK | The request was completed successfully. |
+| **201** | Created | A resource has been created (e.g., a new user or blog post). |
+| **301** | Moved Permanently | Redirects the client's browser to a new webpage or tells search engines that the page has permanently moved. |
+| **302** | Found | Similar to 301, but the redirect is temporary and may change again in the future. |
+| **400** | Bad Request | The request was invalid or missing required information. |
+| **401** | Not Authorized | Authentication is required before accessing this resource. |
+| **403** | Forbidden | The client does not have permission to access this resource. |
+| **404** | Page Not Found | The requested page or resource does not exist. |
+| **405** | Method Not Allowed | The requested HTTP method is not allowed for this resource (e.g., sending a GET instead of a POST). |
+| **500** | Internal Server Error | The server encountered an unexpected error while processing the request. |
+| **503** | Service Unavailable | The server is temporarily unavailable due to overload or maintenance. |
+
+### Headers:
+- Additional bits of data sent to/from the webserver. NOT strictly required but actually it'd be quite hard to view a modern website without them.
+- Common **request headers** sent from client to server:
+    - Host: Tells the server which website to serve (told ya it'll be hard without these) cause modern website are more like multiple VMs hosted on the same server, and thus have the same IP.
+    - User-Agent: Y'all people's browser. Sent so that the server can send data accordingly. (yk some web elements are only supported by select browsers)
+    - Content-Length: When sending the data to a web server such as a form, it tells the web server how much data to expect, this way lost data cases can be identified.
+    - Accept-Encoding: Tells the web server what type of compression/encoding the client uses. This is done so that the correct kind of compression can be used on the data for transmission.
+    - Cookie: Data sent by the server to help it remeber you tf you are. So that you don't have to log in each time you hit <F5>.
+> **Cookies**: So these are interesting, they're set inside your web-client when the server sends them via a 'set-cookie' header. And from then on, every request your browser makes, it sends the cookie along; so that the server knows which pirate is talking.  
+> The *need* for cookies was that HTTP in itself is *stateless*, and as a result of that, can't remeber n' store your info persistenly. So cookies are sent on top of HTTP to make the connection kinda *stateful*.  
+> Cookies are not authenticators themselves, instead, they're like containers that transport a state between your browser and the server. The state now can be a session ID or a login token or anything. The state decides the purpose, not the cookie.  
+> Types of Cookies:  
+> **Session Cookies**: These don't have an expiry date, they remain as long as the browser is open and you're browing, i.e- the *session* exist. When you close the browser? BOOM. GONE  
+> **Question**: But then why do I not have to log in each time I open THM?
+> Cause, Type-2: **Persistent Cookies**: The server sends them with either an expiry date or max-age header. They're stored in your browser's local storage, thus when you open and close  and open chromium again, you're still logged in.  
+> **Third Party Cookies**:  Now, these are the ones that actually track you across websites. How? Well, suppose there are three different sites, all using google ads, your browser will send a `GET` request for the address for the `ad-banner.png`, google will respond with that AND a session-id cookie which your browser now stores, and any other site you visit which has google ads will get a `GET` request with the session-id cookie as well, so google will know what websites you browser AND IN WHAT ORDER (feels reason enough to install Graphene doesn't it?).  
+> **Attack Vector**: **Session Hijacking**: The persistent feature of the session-id cookies make them conveninet, and thus -- at the same time -- make them very valuable as well. Cause anyone who manages to get your persistent cookie doesn't need any password or TFA OTP then, they can just spoof being you, cause the session-id is the only thing proving to the server that it's you. That is why cookies are sent **only** over HTTPS.
+- Common **response headers**:
+    - Set-Cookie: Information sent back to the client to store? **TODO**
+    - Content-Type: Tells the client what type of data is being returned. Helps the browser know how to process it.
+    - Content-Encoding: Again, what method of compression has been used to the data being transmitted so that the browser knows how to uncompress/decode it.
+
+---
+
+## How Websites Work
+### How Websites Work
+- Request-Response model
+- Two ends front and back
+
+### HTML
+- Definiton as the building block of a website.
+- Strucutre, head n' body | Basic Tags
+
+### Javascript
+- Javascript as a programmin language to make static sites into interactive web apps.
+- Onclick functions to change innerHTML
+
+### Sesitive Data Exposure
+- Note on not to leave any sensitive data on the frontend 'cause anyone can view the source. Increases, attack surface.
+
+### HTML Injection
+- Just like SQL injection, but this time to HTML
+- DO NOT TRUST USER INPUT
+
+---
+
+## Other Components
+### Load Blanancers:
+As the name suggests, they balance the load on the server, usually when you connect to a website with a load balancer, your request has to go through it, and when it gets the request it *smartly* forwards the request to one of many servers using alogrithms such as:
+> Round Robin: Sends to each server in turn.  
+> Weighted: Sends to the least busy server.
+
+These guys are also responsible for performing periodic checks on each server (health checks) to make sure they're running.  
+More than that, load balancers can also enforce security rules, like seeing that one certain IP has been sending 12000 SYN flags per minute, they'll drop those packets or for somene trying to Ddos you, they might have rules like only 100 connections/second/IP.
+
+### CDN (Content Delivery Networks):
+A CDN works like a traffic routing service. Suppose you setup a website with cloudflare as the CDN. After that you won't have your files hosted on just one server (though they're still 'hosted' on one actually). The CDN provided would have thousands of distribution servers across the globe, and whenever somone from Hokkaido tries to visit your website, the request would not have to travel all the way to Tallin, the CDN's local distribution server might be in Tokyo or even Hokkaido itself. It'll fetch the data from the source and will serve it in the response to the request, and then the stored data will live with a TTL. And when that TTL expires, it'll just fetch again. This way there's no need to update the codebase every time on 12000 servers, only the source server needs to update.
+
+### Database:
+- [Almost] every website requires a way of storing data. That's where databases come in. Webservers can communicate with them to fetch/update/manipulate data. There are many kinds like MySQL|MongoDB|Postres each serve a different purpose.
+
+### WAF (Web Application Firewall):
+- Defined as firewalls for the web server.
+- Monitors traffic and controls the flow.
+- Watches out for known attack methods, and drops traffic or blocks IPs w.r.t. the situaion.
+
+### How Webservers Work
+- Defined what a web server is, just a computer listening for incoming connections and then uses HTTP to serve the files to IP addresses requesting them.
+- Listed common hosting servers like 'Apache', 'Ngnix' and 'IIS' and that commonly the files are stored in `/var/www/html` for linux based servers and in `C:\inetpub\wwwroot\` for windows based servers like `IIS`
+
+**vHosts**
+- When the same webserver hosts multiple websites in its local storage, and as per the client's request, serves a specific one.
+- vHosts is just a text config file. (yup, lol)
+- No limit to possible number of vHosts.
+
+**Static V/S Dynamic Content**
+- Static: Never Changes     | Changes made at the backend
+- Dynamic : Changes         | reflect at the frontend
+
+**Scripting & Backend Languages**
+- Languages like Python, PHP, JS interact with the database, make changes, update fields on the backend which affects the frontend.  
+- The user only sees the frontend 'cause the backend lies at the server.
+
+---
+
+## Inside A Computer System:
+
+### Inside A Computer System:
+- Puts down the idea that nearly every computer system is made up of the same building blocks.
+- Components Explained:
+    - Motherboard: Connects & holds almost all components
+    - CPU: Brain of the computer, carries out instructions
+    - RAM: Volatile fast memory
+    - Storage: HDD--> Old/Cheaper per GB | SSD--> New/Expensive per GB
+    - NIC: The computer's means of comm. with other computers. Variants:[wired/wireless/PCIe]
+    - PSU: Takes and distributes power to all components
+    - GPU: Picks up info from the OS and programs and outputs visual data to the monitor
+    - I/O Devices: Used for sending n' receiving info to/from the computer
+
+### What Happens When You Press The Power Button
+- You press it
+    - This turns the PSU from inactive to active state where it allow free flow of electricty to ever component as per the need. Which means everything has power already, they're just dumb 'cause they don't have no idea what to do with it.
+
+- CPU steps in
+    - The CPU is one component which is not dumb (it's literally the brain bro)
+    - The CPU has "reset instructions" which tell it exactly what to do at startup: *Execute the code on the BIOS chip (the firmware)*
+
+- The Firm-ware
+    - The code that's now being executed from the BIOS/UEFI chip performs a 'POST' (Power On Self Test)
+    - POST is done to check that all necessary components are plugged in and working, if not, it raises an alarm.
+    - Once POST is done, then UEFI searches for a bootable storage medium. It can be anything that stores data as long as your PC supports booting from it.
+    - This is when -- if you haven't set up auto boot -- you'll see the display with UEFI asking you to choose a boot medium.
+    - After successfully finding a bootable medium, UEFI starts the bootloader.
+
+- Bootloader
+    - Bootloader is the software which controls and oversees the execution and running of your kernel up until the point where it hands things to it.
+    - Once started, the bootloader then loads the OS kernel from the storage medium to the RAM.
+    - The CPU then begins executing the kernel (and no, we're not servering the kernel's head from its body using a machette, it's CODE EXECUTION) and thus the kernel initalizes drivers, memory management n' everything and when it reaches the user space programs, the display appears, asking your fat fingers to log tf in.
+
+---
+
+## Computer Types
+- Computer Types: Laptops, desktops, workstations, servers | Different machines => Different goals.
+- Note on embedded computers & IoT devices:
+    - Embedded: Often never connect to the internet and work for a lifetime locally on the host machine.
+    - IoT: ('cmon man, there's fucking INTERNET in the name) connect to the internet to share data & receive commands.
+
+---
+
+## Client-Server Basics:
+- Explanations in a connection:
+- Request  -> Protocol -> DNS -> Response
+
+### Web Communications In Practice:
+- Launched a VM instance and inspected a locally hosted website with firefox dev tools and saw the request and response.
+
+---
+
+## Virtualisation Basics
+- Virtualisation as a concept to reduce cost and increase efficiency.
+- Hyprevisor as a VM manager.
+- Container as a standalone box with enough config and resources for just the application it's meant to be shipped with. Runs on top of already existing kernel.
+
+---
+
+## Cloud Computing Fundamentals
+
+### Cloud Computing Overview
+- It's not like someone stole the cloud hardening spary from Doraemon and is now hoarding up server racks on them, In as nutshell, all cloud computing means is that you rent someone else's hardware over the internet to use for yourself (not to mention that the someone can be a $2.6 Billion MNC).
+- You'd be surprised to know that even the big corp. like Spotify and Netflix use cloud servers.
+**But Why? Don't they have enough money**
+- Well, actually... yeah. They have money but they don't have "we need 12000 servers for a day so let's rent out a building and then buy some servers" kind of money. So they use cloud based servers like AWS (Amazon Web services), that way they can *instantly* increase/decrease how many servers you are using and thus pay only for what you use, no maintainence (physical) and no need for a 3 inch steel wall room to protect your proprietary servers, cause remeber the AWS is **HUGE** so basically you're enjoying scalable servers, paying as you go, and MNC level security. See the comfort?
+
+---
+
+## Operating Systems Basics: Introduction
 #TODO
 
