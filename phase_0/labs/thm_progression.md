@@ -503,4 +503,22 @@ Before any other add-on, the kernel implements security by itself (and bro is pr
 5. And much more...
 
 ### OS Interaction & Landscape
-#TODO
+**OS Interfaces**
+- Definition of GUI n' CLI, precision & control difference while working on either.
+- Different OS types like desktop/server/mobile (while computers), each for a different reason: to achieve a specific task.
+
+---
+
+## Windows Basics:
+- History of MS-DOS {<-- Kinda like a tty, you are in a black box and you type stuff, box goes brrrrrrrrr}
+- Other windows' features like basic heirarchy of the file structure, root at `C:\`, different slases "backshlashes"
+
+### Configurin' n' Securing:
+- Windows firewall, task manager, security, updating/installing/uninstalling stuff.
+
+---
+
+## Linux(The GOAT) CLI basics:
+- Basic Commands
+- Navigation
+- `find`, `uname`, `df` syntax
