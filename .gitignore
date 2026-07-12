@@ -1,3 +1,6 @@
 # NOT taking videos
 *.mp4
 *.mkv
+
+# Certainly not including my openVPN configuration file
+*.ovpn

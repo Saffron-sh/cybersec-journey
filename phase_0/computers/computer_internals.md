@@ -69,3 +69,54 @@ Before any other add-on, the kernel implements security by itself (and bro is pr
 4. Filesystem protection
 5. And much more...
 
+
+## Data Representation:
+### Representing Colours
+**our first 8 colours**:
+So, initially we only had 8 colours, not in nature jack, in computers. Because deriving from the base 3 colours {red|green|blue} and having them either in an **on** or **off** state {0|1}, that'll give us (2)<sup>3</sup>3 = 8 possible combinations, or in other words: *3 independent 2-bit channels:*
+|R|G|B|Colour|
+|---|---|---|---|
+|1|1|1|White|
+|1|1|0|Yellow|
+|1|0|1|Magenta|
+|0|1|1|Cyan|
+|0|0|1|Blue|
+|1|0|0|Red|
+|0|1|0|Green|
+|0|0|0|Black|
+
+But 8 were not quite enough for the human spectrum, so, we thought: in stead of 3 independent 2 bit channel, what if we have 3 independent 8 bit channels. That ways:  
+R <=> 1 Byte : 8 Bits => 2<sup>8</sup> = 256  
+G <=> 1 Byte : 8 Bits => 2<sup>8</sup> = 256  
+B <=> 1 Byte : 8 Bits => 2<sup>8</sup> = 256  
+
+=> (256)<sup>3</sup> = 16,777,216
+
+Now, **THAT** is a lot of colours. But the number didn't come out of nowhere, even with increased number of colours, it lets us represent each possible colour easily in *hexadecimal*.  
+As each HEX character corresponds to a nibble, a total of 6 hex characters could now easily represent any 24-bit colour.
+> NOTE: That should tell you a very important thing. *Representation is not data. Data is data*. Cause: (FF0000)<sub>16</sub> (255.0.0)<sub>10</sub> (100)<sub>2</sub> all represent the same **Red**.
+
+### Numbers from Decimal to Hex
+A note on different number systems with different bases like:  
+Base 2 : Binary : 0|1  
+Base 8 : Octal  : 0|1|2|3|4|5|6|7  
+Base 10: Decimal: 0|1|2|3|4|5|6|7|8|9  
+Base 16: Hexa-D : 0|1|2|3|4|5|6|7|8|9|A|B|C|D|E|F  
+
+But why introduce characters in HEX?
+> Cause without them, representation becomes ambigious.  
+I.e- FFFFFF is white, cause character is distinct.
+151515151515 is absolute garbage in that context cause who's gonna be determining whether that is 15151|5151515 or what other shit, so we solved the problem with assigning characters to double digit numbers.
+
+---
+
+## Data Encoding
+### ASCII (7-bit)
+- American Standard code for info interchange
+- Used as a common medium of english interpretation on computers
+- ASCII letters
+- ISO/IEC for other western and European countries
+
+### Unicode
+- Unicdoe as the universal character encoding standard
+- Assigns unique code points to each character, is surprisingly capable of not fucking up.

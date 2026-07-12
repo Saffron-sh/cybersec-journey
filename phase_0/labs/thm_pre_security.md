@@ -522,3 +522,158 @@ Before any other add-on, the kernel implements security by itself (and bro is pr
 - Basic Commands
 - Navigation
 - `find`, `uname`, `df` syntax
+
+---
+
+
+## Windows CLI Basics:
+The command prompt, often called `cmd`, is a text based interface where in stead of clicking icons, you enter text based commands telling the computer exactly what you want to do. Quite like our linux TTY and emulators but in a different language.
+
+**Basic Commands**:
+`cd`: Navigation & shows you where you are
+`dir`: List contents of the current directory
+`dir \a`: Show hidden files like `ls -a`
+`dir \s <file>`: Searches for the given file in all folders and subfolders from `.`
+`type`: Same as unix `cat`
+`whoami`: Similar, but here it also gives you the hostname
+`hostname`: Gives you just the hostname
+`systeminfo`: Kinda like `uname` but way too verbose
+`ipconfig`: Quite like our legacy `ifconfig`
+
+---
+
+## OS Security:
+**C**onfidentiality  
+**I**ntegrity    
+**A**vailability
+- The need for an OS to be secure.
+
+### Common examples of security:
+3 weaknesses targeted by most attackers:
+    - Auth and weak passwords
+    - Weak file permission {principle of least privilege}
+    - Malicious programs {trojans/ransomware/worms}
+
+### Practical Example of OS security:
+Attack machine **BABY**;
+> Enumerated the target, found `ssh`, used it to log in (username and password was given), moved horizontally between users, half guided (was given the username and was told to figure out the password from "weak passwords", did, moved vertically (found root creds in `.bash_history`), got flag
+
+---
+
+## Data Representation:
+### Representing Colours
+**our first 8 colours**:
+So, initially we only had 8 colours, not in nature jack, in computers. Because deriving from the base 3 colours {red|green|blue} and having them either in an **on** or **off** state {0|1}, that'll give us (2)<sup>3</sup>3 = 8 possible combinations, or in other words: *3 independent 2-bit channels:*
+|R|G|B|Colour|
+|---|---|---|---|
+|1|1|1|White|
+|1|1|0|Yellow|
+|1|0|1|Magenta|
+|0|1|1|Cyan|
+|0|0|1|Blue|
+|1|0|0|Red|
+|0|1|0|Green|
+|0|0|0|Black|
+
+But 8 were not quite enough for the human spectrum, so, we thought: in stead of 3 independent 2 bit channel, what if we have 3 independent 8 bit channels. That ways:  
+R <=> 1 Byte : 8 Bits => 2<sup>8</sup> = 256  
+G <=> 1 Byte : 8 Bits => 2<sup>8</sup> = 256  
+B <=> 1 Byte : 8 Bits => 2<sup>8</sup> = 256  
+
+=> (256)<sup>3</sup> = 16,777,216
+
+Now, **THAT** is a lot of colours. But the number didn't come out of nowhere, even with increased number of colours, it lets us represent each possible colour easily in *hexadecimal*.  
+As each HEX character corresponds to a nibble, a total of 6 hex characters could now easily represent any 24-bit colour.
+> NOTE: That should tell you a very important thing. *Representation is not data. Data is data*. Cause: (FF0000)<sub>16</sub> (255.0.0)<sub>10</sub> (100)<sub>2</sub> all represent the same **Red**.
+
+### Numbers from Decimal to Hex
+A note on different number systems with different bases like:  
+Base 2 : Binary : 0|1  
+Base 8 : Octal  : 0|1|2|3|4|5|6|7  
+Base 10: Decimal: 0|1|2|3|4|5|6|7|8|9  
+Base 16: Hexa-D : 0|1|2|3|4|5|6|7|8|9|A|B|C|D|E|F  
+
+But why introduce characters in HEX?
+> Cause without them, representation becomes ambigious.  
+I.e- FFFFFF is white, cause character is distinct.
+151515151515 is absolute garbage in that context cause who's gonna be determining whether that is 15151|5151515 or what other shit, so we solved the problem with assigning characters to double digit numbers.
+
+---
+
+## Data Encoding
+### ASCII (7-bit)
+- American Standard code for info interchange
+- Used as a common medium of english interpretation on computers
+- ASCII letters
+- ISO/IEC for other western and European countries
+
+### Unicode
+- Unicdoe as the universal character encoding standard
+- Assigns unique code points to each character, is surprisingly capable of not fucking up.
+- Ease of use cause now you don't have to check what encoding you are writing and pray that the sender uses the same.
+
+> Different UTFs simply are ways of storing unicode code points in bytes, UTF-8 goes intelligent and give anywhere from 1 to 4 bytes depending on character complexity. UTF-16 is a little less intelligent and uses only either 2 bytes or 4 bytes for each characater, more complex ones get 4, and the rest get 2. And then we have...  
+UTF-32, bro says "fuck y'all" and given 4 bytes to everything.
+
+---
+
+## Python: A Simple Demo {Massacare}
+- Building a random number generator and then a guessing game out of it to teach python basics. Syntax and other stuff.
+
+--- 
+
+## Javascript: A Simple Demo
+- `const`: immutable | `let`: mutable
+- `parseint()` for character to number conversion
+
+---
+
+## Database SQL Basics
+- Column: Type of info | Row: One full record
+- Definition of a query and basic queries
+
+---
+
+## The CIA triad
+Cybersec focuses on protecting the three key aspects of the digital world:  
+**C**onfidentiality  
+**I**ntegrity    
+**A**vailability
+
+### Understanding the CIA triad:
+**Confidentiality**:
+- Sensitive data can only be accessed by authorized individuals.  
+
+**Integrity**:
+- Ensures that unauthorized individuals can't mutate data which can often happen in the transition phase, but conceptually can happen anywhere, (yeah, even yo grandma's backyard.)
+
+**Availability**:
+- Ensures data & services are available to authorized users when **needed**
+
+### The Security Mindset
+Interactive exercise to drag-n-drop boxes to classify into one out of *C.I.A*
+
+---
+
+## Cryptography Concepts
+### Hiding Info - Symmetric Encryption
+- Uses two keys(actually two copies of one key), one at the sender's position and one at the reciever's
+- Thus both need a copy of the key
+- Fast and efficient
+- Key sharing problem
+
+### Sharing Keys Safely - Asymmetric Encryption
+- Works on public/private key model
+- More secure <=> More expensive
+- Solved key sharing problem
+
+#### Legacy RSA-style Key Transport
+Client generates a symmetric key, encrypts with the server's public key, sends data to the server, server decrypts with private key and stores the symmteric key.  
+Both then use the symmetric key for bilateral data transmission.
+
+#### Modern Witchcraft
+Server first authenticates it really is `captainsrum.org`  
+Server has a private secret.  
+Client has a private secret.  
+Both derive some info from their own sets of secrets and that derived data is transmitted publically towards the other.  
+Using the other's publically shared data, both use that with their private secrets to generate a symmetric session key. How did that sound like? **Abracadabra!!**
