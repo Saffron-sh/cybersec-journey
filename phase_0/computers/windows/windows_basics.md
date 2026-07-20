@@ -14,3 +14,6 @@ The command prompt, often called `cmd`, is a text based interface where in stead
 `systeminfo`: Kinda like `uname` but way too verbose
 `ipconfig`: Quite like our legacy `ifconfig`
 
+### LSASS
+Local Security Authority Subsystem Service (lsass.exe)  
+Is responsible for password based authentication and storing passwords in windows based system(s). Meterpreter hashdump is something that prints this info, but can only do so if the process which meterpreter is running on has the required privileges to access lsass.exe. One thing which you can do is migrate your meterpreter session to the PID of the lsass.exe, that should be fairly easy, but then don't ask me why there are 256 armed federal agents outside your house. So, try migrating to a process less monitored.

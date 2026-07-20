@@ -1,0 +1,258 @@
+{
+  "entries": [
+    {
+      "id": "1783881877707",
+      "date": "2026-07-12",
+      "time": "06:44 pm",
+      "title": "Phase Zero | Day 23",
+      "body": "Learnt about data representation, how colours used to represented and how they now are represeted using hex colour codes.\nLearnt about the meaning of UTF-8 and unicode and other UTFs which aren't as much frugal.\nTook over a vulnerable linux machine (legally) in THM, but it was guided so no biggie.\nFINISHED THM PRE-SECURITY BABY. TOMORROW WE MOST PROBABLY GET THE WIFI ROUTER INSTALLED 100Mb/s DAYM, INR 3500/3MONTHS AND WE FUCKING START JUNIOR PENETRATION TESTER PATH. FUCKING EXCITED, ALMOST GAVE JACK HIS IRON SIGHT RIFLE.\n\nGYM LOG: Woke up dedicated, dismissed the alarm and saw: SUNDAY, July 12, 2026, and went back to sleep.",
+      "tags": "THM Pre-Sec-Completed!!",
+      "mood": "🔥",
+      "created": "2026-07-12T18:44:37.707Z",
+      "updated": "2026-07-12T18:47:43.194Z"
+    },
+    {
+      "id": "1783791344263",
+      "date": "2026-07-11",
+      "time": "05:35 pm",
+      "title": "Phase Zero | Day 22",
+      "body": "Learnt about operating systems GUI and CLI difference, and not to boast, but nothing I already didn't know.\nThe only thing new I cam across today was the term MS-DOS, everything else was something i was already heavily familiar with in the past.\n\nSee y'all tomorrow. Captain's out!",
+      "tags": "THM Pre-Sec-Continued",
+      "mood": "😴",
+      "created": "2026-07-11T17:35:44.263Z",
+      "updated": "2026-07-11T17:42:43.688Z"
+    },
+    {
+      "id": "1783705166423",
+      "date": "2026-07-10",
+      "time": "05:39 pm",
+      "title": "Phase Zero | Day 21",
+      "body": "Learnt about how the kernel executes things. Systemcalls, user and kernel space. \nLearnt about the duties of the OS, bro is quite the manager.\nLearnt that even the kernel relies on the drivers, it's not like one thing has all the power.\nThe whole stack needs to work together to make fabulous shit happen. The programs, the hardware, the kernel, the drivers, all of them.",
+      "tags": "THM Pre-Sec-Continued",
+      "mood": "🧠",
+      "created": "2026-07-10T17:39:26.423Z",
+      "updated": "2026-07-10T18:25:47.612Z"
+    },
+    {
+      "id": "1783689296039",
+      "date": "2026-07-10",
+      "time": "01:14 pm",
+      "title": "Phase Zero | Day 20",
+      "body": "Completed \"How the web works\" module as well as the \"Computer Fundamentals\"\nlearnt a lot more about how a computer starts up, the POST, the bootloader and the CPU's reset instructions.\nAlso learnt a great deal about working of web servers like CDNs, Load Balancers, and cloud computing, AWS, Azure\nand all. Was quite a productive day TBH\n\nGYM LOG:\nRUN: ~1100m                                                                        Squats: 10 | Resistance Cycling: 100Seconds\nCRUNCHES: 15 normal + 10 russian twists                           Dead Hang: 31.4 seconds\nPush Ups | Tricep Dips: 8                                                      Shadow boxing: (2.5kg) ~5 minutes (divided into 4 rounds)\n",
+      "tags": "THM  Pre-Sec-Continued",
+      "mood": "🧠",
+      "created": "2026-07-10T13:14:56.039Z",
+      "updated": "2026-07-10T13:17:04.975Z"
+    },
+    {
+      "id": "1783358498789",
+      "date": "2026-07-06",
+      "time": "05:21 pm",
+      "title": "Phase Zero | Day 19",
+      "body": "Continued doing the \"HTTP in detail\" room, did:                      |                         GYM  LOG:\nWhat is HTTP(S)                                                                         |                         RUN: ~1000m\nRequests & Responses                                                             |                        Crunches: 20 (felt considerably easier)\nHTTP Methods                                                                           |                         Push Ups: 8 | Tricep Dips: 8 | Squats: 10\nHTTP Status Codes                                                                   |                          Dead Hang: 35.1 seconds\nHeaders                                                                                     |                         Shadow Box: ~5 min | Resistance Cycle: 100 seconds\n\nStarted: \"HTTP in detail\"-->Cookies\n\nDidn't do anything else today because i got sidelined looking for a laptop and the financing options on the P52 & P53 (thinkpads) then had a talk with my father, was trying to resolve his doubt that after failing to pass the SSB, am i in a black hole or actually working towards something. Did make him feel better. ",
+      "tags": "THM Pre-Sec-Continued",
+      "mood": "😤",
+      "created": "2026-07-06T17:21:38.789Z",
+      "updated": "2026-07-06T17:27:42.630Z"
+    },
+    {
+      "id": "1783261922375",
+      "date": "2026-07-05",
+      "time": "02:32 pm",
+      "title": "Phase Zero | Day 18",
+      "body": "Covered these rooms in THM: Networks |  Intro To LAN | OSI Model | Packets and Frames | Extending Your Network | DNS in Detail |\nStarted This room: HTTP in detail\n\nCovered mostly what i had already done in week 1, but was a good revision, some new topics came to light like: RIP, PPP, PPTP, TCP Sequence & Acknowlegement number\n\nLearnt that i still have a long way to go. BUT IT IS GONNA BE FUN BABY.\n\nGYM LOG:\nWent to the gym, gym was closed, realized it was sunday, came back.",
+      "tags": "THM Pre-Sec-Continued",
+      "mood": "⚡",
+      "created": "2026-07-05T14:32:02.375Z",
+      "updated": "2026-07-05T14:36:30.913Z"
+    },
+    {
+      "id": "1783184519227",
+      "date": "2026-07-04",
+      "time": "05:01 pm",
+      "title": "Phase Zero | Day 17",
+      "body": "Learnt about setting up VirtualBox, the entirety, host modules, downloading->compiling->loading->persisting\nLearnt about the network internals of VirutalBox\nTHEN\nActually configured my own VirutalBox setup. Configured my own topology.\nTroubleshooted the network not working with two network adpaters, only to find out I had to click the icon. Bruh.\n\nGYM LOG:\n1000m Run (Treadmill)\n5 push ups | 5 trice dips\n20 crunches\nDead Hang: 30.6 seconds\nResistance Cycling: 100 seconds\nDumb-Bell shadow boxing ~5 minutes",
+      "tags": "Vbox Setup,THM Pre-Security-init",
+      "mood": "🧠",
+      "created": "2026-07-04T17:01:59.227Z",
+      "updated": "2026-07-04T17:15:59.827Z"
+    },
+    {
+      "id": "1783099680513",
+      "date": "2026-07-03",
+      "time": "05:28 pm",
+      "title": "Phase Zero | Day 16",
+      "body": "Learnt about the different kinds of XSS, and how the browser gets blamed when bro's doing exactly what he's told to.\nFinished Zaid Sabih's course today, and will complete the home lab tomorrow and get started with THM.\n\nGYM LOG:\n1000m Run (Treadmill)\n5 push ups | 5 trice dips\n20 crunches\nDead Hang: ~28sec\n1 minute or two of resistance cycling\nDumb-bell shadow boxing ~5 minutes",
+      "tags": "XSS,Home Lab,VirutalBox",
+      "mood": "🔥",
+      "created": "2026-07-03T17:28:00.497Z",
+      "updated": "2026-07-04T17:07:07.949Z"
+    },
+    {
+      "id": "1783015125255",
+      "date": "2026-07-02",
+      "time": "05:58 pm",
+      "title": "Phase Zero | Day 15",
+      "body": "Learnt about the two methods of resource \"logistics\" for HTTP: GET & POST\nLearnt that they don't just work with html pages, they work with WAY more.\n\nLearnt about the concept of SQL Injection in web apps.\nLearnt that SQL itself is quite innocent. It' s the Application that's been on marijuana.\n\nStarting GYM from tomorrow, and -- effective immediately -- this log will now have the day's GYM routine as well. \nCAUSE WHO TF SAID TS FORMAL BITCH!!! LMAO",
+      "tags": "GET/POST,SQLi",
+      "mood": "🧠",
+      "created": "2026-07-02T17:58:45.255Z",
+      "updated": "2026-07-02T18:02:27.977Z"
+    },
+    {
+      "id": "1782926415015",
+      "date": "2026-07-01",
+      "time": "05:20 pm",
+      "title": "Phase Zero | Day 14",
+      "body": "Learnt about what pivoting is, in the context of taking over (hacking) machines.\n\nLeart NOT to fuck with the sleep cycle, or it fucks back. The bill has to be paid.\nLearnt how batman arkham asylum is a fucking great game for its time lol.",
+      "tags": "Pivoting",
+      "mood": "😴",
+      "created": "2026-07-01T17:20:15.015Z",
+      "updated": "2026-07-01T17:21:28.933Z"
+    },
+    {
+      "id": "1782765870537",
+      "date": "2026-06-29",
+      "time": "08:44 pm",
+      "title": "Phase Zero | Day 13",
+      "body": "Learnt how trojans can be easily defended against.\nYou just gotta have SOME FUCKING COMMON SENSE about you and  check whether the file is what it is, or it straight up lyin'.\n\nLearnt different methods to make our machine publicly accessible on the internet, in fancy words: Learnt how to establish an endpoint on the public internet for your private machine.\nThere are WAYS man.\n\nLearnt how much the term \"Tunnel\" is thrown around lol.",
+      "tags": "Trojan Defense,Exposing yourself to the internet",
+      "mood": "🔥",
+      "created": "2026-06-29T20:44:30.537Z",
+      "updated": "2026-06-29T20:47:45.641Z"
+    },
+    {
+      "id": "1782687658756",
+      "date": "2026-06-28",
+      "time": "11:00 pm",
+      "title": "Phase Zero | Day 12",
+      "body": "Learnt about how backdoors are created, and how tools just automate things for you, msfvenom might make the payload included backdoor for you, but it shouldn't become your identity.\n\nLearnt about the use of Maltego for information gathering, great tool, but still a tool.\nLearnt about the security stack of SMTP which funny enough, also has tree entities making it actually secure just like DNSSEC in DNS\n\nAnd learnt how it's not actually wise to watch vidoes seeing a guy go clicking about on a software.",
+      "tags": "Backdoors,Payloads,E-mail security",
+      "mood": "😴",
+      "created": "2026-06-28T23:00:58.756Z",
+      "updated": "2026-06-28T23:07:49.281Z"
+    },
+    {
+      "id": "1782600651933",
+      "date": "2026-06-27",
+      "time": "10:50 pm",
+      "title": "Phase Zero | Day 11",
+      "body": "Learnt about attack methods. How there's client and server side attacks.\nLearnt about how VPN works, like actually works, and nope, it doesn't give you internet.\nLearnt about metasploit and how to use it (a little)\nLearnt about bro's distant cousin NEXPOSE, which is a jack of all trades.... on steroids.\n\nLearnt that even if my phone's battery is 7000mAh, i should still carry my charger on me.",
+      "tags": "Attack Methods,Metasploit,VPN",
+      "mood": "🔥",
+      "created": "2026-06-27T22:50:51.933Z",
+      "updated": "2026-06-27T22:54:02.237Z"
+    },
+    {
+      "id": "1782493326603",
+      "date": "2026-06-26",
+      "time": "05:02 pm",
+      "title": "Phase Zero | Day 10",
+      "body": "Learnt about DNS Spoofing and how it works.\nLearnt how HTTPS is near impossible to spoof using DNS because of cryptographic, and \nthat's why hsts hijacking exists.\nLearnt about DNSSEC internals.\n(THEY REALLY ARE EXTENSIONS, AIN'T ONE THING FUCKING THREE, TRES)\n\nAnd then... Bought CosmicByte Ares tri mode controller and battle tested  for bluetooth, 2.4GHz dongle and wired playing on linux, and  bt over android lol. TS HAS HALL EFFECT STICKS AND TRIGGERS. TS fire lol.",
+      "tags": "DNS Spoofing,DNSSEC",
+      "mood": "🎯",
+      "created": "2026-06-26T17:02:06.603Z",
+      "updated": "2026-06-26T17:04:40.023Z"
+    },
+    {
+      "id": "1782385784152",
+      "date": "2026-06-25",
+      "time": "11:09 am",
+      "title": "Phase Zero | Day 9",
+      "body": "Learnt how traceroute does what it does. (bro quite literally traces the route)\nLearnt how nmap `-Pn` works and why it is a good tool to have in hand cause at time the servers just be lyin'\nLearnt enumeration methodology.\nHave started to prioritize information gathering and understanding over exploits.\nLearnt how every new piece of information changes the whole hypothesis (Bayesian principle)\n\nLearnt that old bob has seen things.",
+      "tags": "Traceroute,More NMAP,Enumeration",
+      "mood": "🧠",
+      "created": "2026-06-25T11:09:44.152Z",
+      "updated": "2026-06-25T11:12:19.672Z"
+    },
+    {
+      "id": "1782325209924",
+      "date": "2026-06-24",
+      "time": "06:20 pm",
+      "title": "Phase Zero | Day 8",
+      "body": "Learnt about enumeration and recon habits.\nLearnt why information gathering is like 80% of penetration testing.\nLearnt to be patient and keep, quite literally, poking around.\nLearnt nmap internals.\n\nDid a scan on the library router and  found out that it was running HTTPS.\nFrom there, did a service version scan, and  found a lead from the <title> of the HTML.\nLooked that up and found that DEFAULT CREDENTIALS. (took like 10 minutes, most of it gathering info)\n\nDisclosed that to the owner and had bro change shit from default credentials to ANYTHING.\nDid a lot, learnt more than I did.\n(Oh and the streak gap is cause i had a medical appointment, yup, human factors LMAO)",
+      "tags": "Enumeration,Recon,Nmap",
+      "mood": "🧠",
+      "created": "2026-06-24T18:20:09.924Z",
+      "updated": "2026-06-24T18:25:31.297Z"
+    },
+    {
+      "id": "1782152478720",
+      "date": "2026-06-22",
+      "time": "06:21 pm",
+      "title": "Phase Zero | Day 7",
+      "body": "Learnt the common ports used for services.\nLearnt the attack methodology used in penetration testing.\nLearnt about the attack surface on each layer of the OSI model and distinguishing between each one.\nLearnt about TLS, and the cryptographic protection used  for web pages such as CA certificates, public and private keys.\n\nTook significantly less notes today, but sure as hell it was a great sail. \nWEEK ONE ENDS, BUT THE VOYAGE IS JUST BEGINNING.",
+      "tags": "Common Ports, Attack Methods",
+      "mood": "🧠",
+      "created": "2026-06-22T18:21:18.720Z",
+      "updated": "2026-06-22T18:24:24.440Z"
+    },
+    {
+      "id": "1782066601802",
+      "date": "2026-06-21",
+      "time": "06:30 pm",
+      "title": "Phase Zero | Day 6",
+      "body": "Learnt about the DNS records which live on the authoritative NS.\nAnd holy fuck they don't just serve the IP they server ALL SORTS OF SHIT, it's like a fucking buffet.\nLearnt about how DHCP actually works, well... i did know about lease, but learnt that the DHCP pool and total usable addresses in a subnet are two different things. The former is a subset of the latter.\n\nDid use Wireshark today, sent ARP discovery requests from my laptop to the router and then captured the whole flow of request going and coming back through Wireshark.\nSHIT FELT FIRE. FUCKING DOPAMINE FR FR.\n\nScreenshots can be found in the github repository at: https://github.com/saffron-sh/cybersec-journey",
+      "tags": "DNS Records,DHCP,Wireshark",
+      "mood": "🔥",
+      "created": "2026-06-21T18:30:01.802Z",
+      "updated": "2026-06-21T18:34:00.273Z"
+    },
+    {
+      "id": "1781979841117",
+      "date": "2026-06-20",
+      "time": "06:24 pm",
+      "title": "Phase Zero | Day 5",
+      "body": "Learnt how DNS actually works.\nLearnt about why /etc/hosts overrides DNS\nLearnt the hierarchy of the DNS recursive search.\nLearnt about the existence of registry & registrars for domains.\nLearnt who TF am i paying money to when i buy a domain.\nLearnt about linux 'dig' tool.\nLearnt about the existence of ICANN & IANA\nLearnt why tf a messed up sleep cycle can lead to a sub-optimal level of productivity day.\nAnd DMAN, it's not like the DNS just gives you the IP addresses, bro has to ask, fucking thrice LMAO.\nTS GOT LEVELS TO IT, LITERALLY.",
+      "tags": "DNS",
+      "mood": "😴",
+      "created": "2026-06-20T18:24:01.117Z",
+      "updated": "2026-06-21T18:29:52.202Z"
+    },
+    {
+      "id": "1781789455309",
+      "date": "2026-06-18",
+      "time": "01:30 pm",
+      "title": "Phase Zero | Day 4",
+      "body": "Learnt about Subnets\nLearnt about the CIDR notation\nLearnt about How the LAN is divided internally. AND HOLY FUCK THERE ARE WAYS.\n\nLearnt how to quickly find the Broadcast and the Network IP using the \"Octet Blocks\" method\nTS GOLD FR FR\nUnderstand both the old school binary way of understanding and translating Subnets as well as the modern, quick method which used octet block method.",
+      "tags": "Subnetting,CIDR",
+      "mood": "🧠",
+      "created": "2026-06-18T13:30:55.293Z",
+      "updated": "2026-06-18T13:36:17.982Z"
+    },
+    {
+      "id": "1781706136310",
+      "date": "2026-06-17",
+      "time": "02:22 pm",
+      "title": "Phase Zero | Day 3",
+      "body": "Learn a SHIT TON about how ONE packet goes from my browser all the way to the servers of the host i am trying to reach. AND MIND YOU IT'S A FUCKING GREAT JOURNEY LMAO.\nLearnt about TCP internals\nLearnt about UDP internals\nLearnt about IP FUCKING INTERNALS (yeah direct fucking connection to the first sentence)\nLearnt about why ROUTERS are quite litreally ROUTERS lmao. \nThey route packets from HOP to HOP\nLearnt about TTL. THIS IS FUCKING AMAZING",
+      "tags": "TCP-UDP,IP,Routing Tables",
+      "mood": "🔥",
+      "created": "2026-06-17T14:22:16.310Z",
+      "updated": "2026-06-17T14:25:59.131Z"
+    },
+    {
+      "id": "1781612162563",
+      "date": "2026-06-16",
+      "time": "12:16 pm",
+      "title": "Phase Zero | Day 2",
+      "body": "Learnt about how NAT actually works, and what it stores.\nLearnt the distinction between ports and sockets.\nLearnt about ephemeral ports\nLearnt ss basics\nLearnt How packets actually travel across the internet, they don't just go to google, they go from source->router->router->router->a port of the destination.\nLearnt how processes in linux care about sockets, ports are just like always existing locations, and sockets are what actually turn them from dormant to active.",
+      "tags": "Network Internals, NAT, Ports, Sockets",
+      "mood": "🧠",
+      "created": "2026-06-16T12:16:02.563Z",
+      "updated": "2026-06-16T12:21:32.003Z"
+    },
+    {
+      "id": "1781519236622",
+      "date": "2026-06-15",
+      "time": "10:27 am",
+      "title": "Phase Zero | Day 1",
+      "body": "Learnt the OSI model, how things work in it.\nLearnt how each layer works with the other in unison, it's not like they layers are too different from each other. \n\nTHEY WORK TOGETHER, YEAH.\n\nLearnt that DNS is layer 7, not layer 4.\nLearnt that layer 7 (application)creates an HTTP request, layer 4 (transport) puts the source port and the destination port in the TCP header and the paylod becomes the IP packet which is in turn created at layer 3, Network layer, which is put in the Ethernet frame created at layer 2, it contains a source MAC, and the destination MAC (your router), and then the layer 1, the physical cable, pushes it into bits and it traverses as light signals.",
+      "tags": "OSI Model",
+      "mood": "⚡",
+      "created": "2026-06-15T10:27:16.622Z",
+      "updated": "2026-06-15T10:35:55.165Z"
+    }
+  ],
+  "exported": "2026-07-12T18:53:48.151Z"
+}

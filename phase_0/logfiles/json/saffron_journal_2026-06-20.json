@@ -1,0 +1,60 @@
+{
+  "entries": [
+    {
+      "id": "1781979841117",
+      "date": "2026-06-20",
+      "time": "06:24 pm",
+      "title": "Phase Zero | Day 5",
+      "body": "Learnt how DNS actually works.\nLearnt about why /etc/hosts overrides DNS\nLearnt the hierarchy of the DNS recursive search.\nLearnt about the existence of registry & registrars for domains.\nLearnt who TF am i paying money to when i buy a domain.\nLearnt about linux 'dig' tool.\nLearnt about the existence of ICANN & IANA\nLearnt why tf a messed up sleep cycle can lead to a sub-optimal level of productivity day.\nAnd DMAN, it's not like the DNS just gives you the IP addresses, bro has to ask, fucking thrice LMAO.\nTS GOT LEVELS TO IT, LITERALLY.",
+      "tags": "DNS",
+      "mood": "😴",
+      "created": "2026-06-20T18:24:01.117Z",
+      "updated": "2026-06-20T18:28:50.006Z"
+    },
+    {
+      "id": "1781789455309",
+      "date": "2026-06-18",
+      "time": "01:30 pm",
+      "title": "Phase Zero | Day 4",
+      "body": "Learnt about Subnets\nLearnt about the CIDR notation\nLearnt about How the LAN is divided internally. AND HOLY FUCK THERE ARE WAYS.\n\nLearnt how to quickly find the Broadcast and the Network IP using the \"Octet Blocks\" method\nTS GOLD FR FR\nUnderstand both the old school binary way of understanding and translating Subnets as well as the modern, quick method which used octet block method.",
+      "tags": "Subnetting,CIDR",
+      "mood": "🧠",
+      "created": "2026-06-18T13:30:55.293Z",
+      "updated": "2026-06-18T13:36:17.982Z"
+    },
+    {
+      "id": "1781706136310",
+      "date": "2026-06-17",
+      "time": "02:22 pm",
+      "title": "Phase Zero | Day 3",
+      "body": "Learn a SHIT TON about how ONE packet goes from my browser all the way to the servers of the host i am trying to reach. AND MIND YOU IT'S A FUCKING GREAT JOURNEY LMAO.\nLearnt about TCP internals\nLearnt about UDP internals\nLearnt about IP FUCKING INTERNALS (yeah direct fucking connection to the first sentence)\nLearnt about why ROUTERS are quite litreally ROUTERS lmao. \nThey route packets from HOP to HOP\nLearnt about TTL. THIS IS FUCKING AMAZING",
+      "tags": "TCP-UDP,IP,Routing Tables",
+      "mood": "🔥",
+      "created": "2026-06-17T14:22:16.310Z",
+      "updated": "2026-06-17T14:25:59.131Z"
+    },
+    {
+      "id": "1781612162563",
+      "date": "2026-06-16",
+      "time": "12:16 pm",
+      "title": "Phase Zero | Day 2",
+      "body": "Learnt about how NAT actually works, and what it stores.\nLearnt the distinction between ports and sockets.\nLearnt about ephemeral ports\nLearnt ss basics\nLearnt How packets actually travel across the internet, they don't just go to google, they go from source->router->router->router->a port of the destination.\nLearnt how processes in linux care about sockets, ports are just like always existing locations, and sockets are what actually turn them from dormant to active.",
+      "tags": "Network Internals, NAT, Ports, Sockets",
+      "mood": "🧠",
+      "created": "2026-06-16T12:16:02.563Z",
+      "updated": "2026-06-16T12:21:32.003Z"
+    },
+    {
+      "id": "1781519236622",
+      "date": "2026-06-15",
+      "time": "10:27 am",
+      "title": "Phase Zero | Day 1",
+      "body": "Learnt the OSI model, how things work in it.\nLearnt how each layer works with the other in unison, it's not like they layers are too different from each other. \n\nTHEY WORK TOGETHER, YEAH.\n\nLearnt that DNS is layer 7, not layer 4.\nLearnt that layer 7 (application)creates an HTTP request, layer 4 (transport) puts the source port and the destination port in the TCP header and the paylod becomes the IP packet which is in turn created at layer 3, Network layer, which is put in the Ethernet frame created at layer 2, it contains a source MAC, and the destination MAC (your router), and then the layer 1, the physical cable, pushes it into bits and it traverses as light signals.",
+      "tags": "OSI Model",
+      "mood": "⚡",
+      "created": "2026-06-15T10:27:16.622Z",
+      "updated": "2026-06-15T10:35:55.165Z"
+    }
+  ],
+  "exported": "2026-06-20T18:52:19.001Z"
+}
