@@ -80,3 +80,89 @@ nmap -p- #with any option.
 > (The ports themselves are still discovered normally.)
 > If the host is actually down or some is actually closed, we'll get that info anyways.
 > Rare "low risk high reward" event.
+
+---
+
+## Additionals from THM JPT:
+
+## Null, Fin & Xmas Scan
+All used to try & evade firewalls
+
+**Null**: Sends a TCP packet with NO flags
+**Fin**: Sends a TCP packet with ONLY the `FIN` flag
+**Xmas**: Sends a TCP packet with ONLY `URG`,`PUSH`,`FIN` flags
+
+Now, the [RFC 9293](https://www.rfc-editor.org/info/rfc9293/) states/mandates that, for any malformed packet the host must respond with TCP `RST` if the port is closed, or ignore it (like your ex did) if the port is open. Since firewalls often also just ignore them, teh response from these scans can be:
+`open|filtered`, `filtered`, `closed`
+
+**When only "Filtered"**
+> When a firewall sends an ICMP reply back to your maching stating something like "connection blocked" or "unauthorized", it is known that the target has a firewall working, because the RFC **mandates** that the host must drop a malformed packet.
+
+### ICMP Network Scanning (-sn)
+As the name suggests, uses ICMP echo requests to check if a host is alive or not.
+```txt
+            |--root: 443: TCP SYN
+            |      : 80 : TCP ACK
+If run as --|
+            |        :443: TCP SYN
+            |non root: 80: TCP ACK
+```
+
+### Nmap Scripting Engine (NSE)
+[usernorm@xarch phase_0]$ ### Null, Fin & Xmas Scan
+All used to try & evade firewalls
+
+**Null**: Sends a TCP packet with NO flags
+**Fin**: Sends a TCP packet with ONLY the `FIN` flag
+**Xmas**: Sends a TCP packet with ONLY `URG`,`PUSH`,`FIN` flags
+
+Now, the [RFC 9293](https://www.rfc-editor.org/info/rfc9293/) states/mandates that, for any malformed packet the host must respond with TCP `RST` if the port is closed, or ignore it (like your ex did) if the port is open. Since firewalls often also just ignore them, teh response from these scans can be:
+`open|filtered`, `filtered`, `closed`
+
+**When only "Filtered"**
+> When a firewall sends an ICMP reply back to your maching stating something like "connection blocked" or "unauthorized", it is known that the target has a firewall working, because the RFC **mandates** that the host must drop a malformed packet.
+
+### ICMP Network Scanning (-sn)
+As the name suggests, uses ICMP echo requests to check if a host is alive or not.
+```txt
+            |--root: 443: TCP SYN
+            |      : 80 : TCP ACK
+If run as --|
+            |        :443: TCP SYN
+            |non root: 80: TCP ACK
+```
+
+### Nmap Scripting Engine (NSE)
+The scripting engine for `nmap`. Yup this bad boy can do more than just scanning, **it can run scripts** written in `lua`. The reason being that only knowing that the target runs SMB ain't enough, so with scripts, we can get a lot *lot* more. Like checking if the target is vulnerable to a known vulnerability or even exploiting.
+> Yeah, bro uses the fine line between enumeration and exploiting like a fucking jump rope.
+
+**Types of Scripts**:
+1. Safe
+2. Vuln
+3. Intrusive
+4. Exploit
+5. Auth
+6. Brute
+7. Discovery
+
+### Firewall Evasion
+`-Pn` : To avoid discovery and just scan.
+> avoid discovery as in taking the concept of checking whether the host is alive or not, and throwing it fucking overboard
+`-f`: Fragment packets to make them smaller
+`--mtu`: Even more control over *max transmission size*
+`scan-delay`: Namesake
+`--badsum`: Intentionally sends a bad checksum with the TCP packet to check how and where it gets treated and in what way.
+```txt
+            |------->Host-->DROPPED
+            |
+            |----->Firewall -- Host
+            |          󰘍 DROPPED
+            |       DROPPED
+--badsum ---|
+            |----->Firewall -- Host
+            |                   󰘍 DROPPED
+            |
+            |----->Firewall -- Host
+                DROPPED 󰘌
+              + ICMP reply
+```
